@@ -17,8 +17,8 @@
             <tr>
                 <td class="note-text" style="line-break: anywhere;" data-note-id="{{ note.id }}">{{ note.data }}</td>
                 <td>
-                    <button type="button" class="btn btn-danger btn-sm" onClick="deleteNote('{{note.id}}')">Delete</button>
                     <button type="button" class="btn btn-primary btn-sm edit-btn" data-toggle="modal" data-target="#modalContactForm">Edit</button>
+                    <button type="button" class="btn btn-danger btn-sm" onClick="deleteNote('{{note.id}}')">Delete</button>
                 </td>
             </tr>
         {% endfor %}
