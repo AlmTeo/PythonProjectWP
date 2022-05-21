@@ -25,11 +25,27 @@ def home():
 @views.route('/delete-note', methods=['POST'])
 def delete_note():
     note = json.loads(request.data)
-    noteId = note['noteId']
-    note = Note.query.get(noteId)
+    note_id = note['noteId']
+    note = Note.query.get(note_id)
+    
     if note:
         if note.user_id == current_user.id:
             db.session.delete(note)
             db.session.commit()
     
     return jsonify({})
+
+@views.route('/update-note', methods=['POST'])
+def update_note():
+    if request.method == 'POST':
+        note = json.loads(request.data)
+        note_id = note['noteId']
+        note_contents = note['noteContents']
+
+        if len(note_contents) < 1:
+            flash('Note is too short!', category='error')
+        else:
+            note = Note.query.get(note_id)
+            note.data = note_contents
+            db.session.commit()
+            flash('Note added!', category='success')
